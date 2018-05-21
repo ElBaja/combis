@@ -20,7 +20,7 @@ class ProfileForm extends Component {
     {
       return alert('Please fill in your name.')
     }
-
+    console.log(this.state.name +" name")
     this.props.onProfileFormSubmit(this.state.name)
   }
 

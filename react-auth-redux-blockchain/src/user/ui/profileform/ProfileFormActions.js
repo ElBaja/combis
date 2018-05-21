@@ -5,6 +5,7 @@ const contract = require('truffle-contract')
 
 export const USER_UPDATED = 'USER_UPDATED'
 function userUpdated(user) {
+  console.log(user)
   return {
     type: USER_UPDATED,
     payload: user
@@ -24,7 +25,6 @@ export function updateUser(name) {
 
       // Declaring this for later so we can chain functions on Authentication.
       var authenticationInstance
-
       // Get current ethereum wallet.
       web3.eth.getCoinbase((error, coinbase) => {
         // Log errors, if any.
@@ -38,11 +38,16 @@ export function updateUser(name) {
           // Attempt to login user.
           authenticationInstance.update(name, {from: coinbase})
           .then(function(result) {
-            // If no error, update user.
-
-            dispatch(userUpdated({"name": name}))
-
+            authenticationInstance.login({from: coinbase})
+            .then(function(result) {
+            // If no error, login user.
+            var surname = web3.toUtf8(result[1])
+            var userName = web3.toUtf8(result[0])
+            dispatch(userUpdated({"name": userName,
+                                   "surname" :surname
+                                 }))
             return alert('Name updated!')
+          })
           })
           .catch(function(result) {
             // If error...

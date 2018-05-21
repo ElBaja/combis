@@ -3,6 +3,7 @@ import ProfileForm from './ProfileForm'
 import { updateUser } from './ProfileFormActions'
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     name: state.user.data.name
   }

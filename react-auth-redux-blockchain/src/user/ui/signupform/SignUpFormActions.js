@@ -28,14 +28,12 @@ export function signUpUser(name) {
         authentication.deployed().then(function(instance) {
           authenticationInstance = instance
 
-          // Attempt to sign up user.
           authenticationInstance.signup(name, {from: coinbase})
           .then(function(result) {
-            // If no error, login user.
+            console.log("ovdje sam napravio signup")         
             return dispatch(loginUser())
           })
           .catch(function(result) {
-            // If error...
           })
         })
       })

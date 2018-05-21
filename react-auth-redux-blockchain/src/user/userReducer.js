@@ -4,19 +4,18 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   if (action.type === 'USER_LOGGED_IN' || action.type === 'USER_UPDATED')
-  {
+  { 
+    console.log(action.payload.name)
     return Object.assign({}, state, {
       data: action.payload
     })
   }
-
   if (action.type === 'USER_LOGGED_OUT')
   {
     return Object.assign({}, state, {
-      data: null
+      data: null,
     })
   }
-
   return state
 }
 
